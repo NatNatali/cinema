@@ -1,0 +1,9 @@
+.ant-tabs-nav-container{
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+}
+
+.ant-tabs-bar{
+    border-bottom: none !important;
+}
