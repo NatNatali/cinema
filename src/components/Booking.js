@@ -10,6 +10,7 @@ const { Option } = Select;
 const Booking = ({ history, match }) => {
     const [selectedSession, setSelectedSession] = useState(null);
     const [sessions, setSessions] = useState([]);
+    const [date, setDate] = useState([]);
     const [seats, setSeats] = useState([]);
 
     function info() {
@@ -28,17 +29,14 @@ const Booking = ({ history, match }) => {
         });       
     }
     const filmId = match.params.id;
+    
     useEffect(() => {
-        console.log(filmId);
-        axios.get('http://localhost:3030/sessions', {
-            params: {
-                id: filmId
-              }
-        })
+        axios.get('http://localhost:3030/sessions-date', {})
         .then((res) => {
-            setSessions(res.data);
+            console.log('resresres', res)
+            setDate(res.data);
         })
-    }, [filmId])
+    }, [])
     
     const children = [];
         for (let i = 10; i < 36; i++) {
@@ -59,6 +57,18 @@ const Booking = ({ history, match }) => {
         setSelectedSession(value)
     }
 
+    const onSelectDate = (value) => {
+        axios.get('http://localhost:3030/sessions', {
+            params: {
+                id: filmId,
+                date: value,
+              }
+        })
+        .then((res) => {
+            setSessions(res.data);
+        })
+    }
+
     const onSelectSeat = (value) => {
         setSeats(value)
     }
@@ -72,33 +82,33 @@ const Booking = ({ history, match }) => {
             </Col>        
         </Row>
         <Row type='flex'>
-                <Col offset={2} style={{ display: 'flex', flexFlow: 'column nowrap', justifyContent: 'center', paddingLeft: '7px' }}>
-                    <span>
-                        Select Date
-                    </span>
-                </Col>
-                <Col offset={4}>
-                    <Select placeholder='Select session' onChange={onSelectSession}>
-                        {sessions?.map((session, index) => <Option key={index} value={session.Session_time}>
-                            {session.Session_time}
-                        </Option>)}
-                    </Select>
-                </Col>
-            </Row>
-        <Row type='flex'>
-                <Col offset={2} style={{ display: 'flex', flexFlow: 'column nowrap', justifyContent: 'center', paddingLeft: '7px' }}>
+            <Col offset={2} span={2} style={{ display: 'flex', flexFlow: 'column nowrap', justifyContent: 'center', paddingLeft: '7px' }}>
+                <span>
+                    Select Date
+                </span>
+            </Col>
+            <Col offset={4} span={4}>
+                <Select placeholder='Select Date' onChange={onSelectDate} style={{ width: '100%' }}>
+                    {date?.map((date, index) => <Option key={index} value={date.Date}>
+                        {date.Date}
+                    </Option>)}
+                </Select>
+            </Col>
+        </Row>
+        {(sessions.length && <Row type='flex' style={{ marginTop: '20px' }}>
+                <Col offset={2} span={2} style={{ display: 'flex', flexFlow: 'column nowrap', justifyContent: 'center', paddingLeft: '7px' }}>
                     <span>
                         Select Session
                     </span>
                 </Col>
-                <Col offset={4}>
-                    <Select placeholder='Select session' onChange={onSelectSession}>
+                <Col offset={4} span={4}>
+                    <Select placeholder='Select session' onChange={onSelectSession} style={{ width: '100%' }}>
                         {sessions?.map((session, index) => <Option key={index} value={session.Session_time}>
                             {session.Session_time}
                         </Option>)}
                     </Select>
                 </Col>
-            </Row>
+        </Row>)}
         {selectedSession && (<Row style={{ marginTop: '20px'}}>
                 <Col offset={2} span={8}>
                     <Form name='complex-form' onFinish={onFinish} labelCol={{ span: 5 }}>
