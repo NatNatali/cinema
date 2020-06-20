@@ -155,10 +155,7 @@ const Booking = ({ history, match }) => {
                                     mode='multiple'
                                 >
                                     {children?.map((value, index) => {
-                                        return <Option key={index} value={{
-                                            key: `R-${value.Row}, S-${value.Seat}`,
-                                            id: value.Seat_ID,
-                                        }}>Row-{value.Row}, Seat-{value.Seat}</Option>
+                                        return <Option key={index} value={`R-${value.Row}, S-${value.Seat}`}>Row-{value.Row}, Seat-{value.Seat}</Option>
                                 })}
                                 </Select>
                             </Form.Item>
@@ -230,7 +227,7 @@ const Booking = ({ history, match }) => {
                                         Green
                                     </Col>
                                     <Col span={7}>
-                                        {seat.key}
+                                        {seat}
                                     </Col>
                                     <Col span={7}>
                                          {selectedDate}
