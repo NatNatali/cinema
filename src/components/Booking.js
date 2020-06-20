@@ -65,6 +65,7 @@ const Booking = ({ history, match }) => {
               }
         })
         .then((res) => {
+            console.log('res', res)
             setSessions(res.data);
         })
     }
