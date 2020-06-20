@@ -8,10 +8,12 @@ const { Option } = Select;
 
 
 const Booking = ({ history, match }) => {
+    const [selectedDate, setSelectedDate] = useState(null)
     const [selectedSession, setSelectedSession] = useState(null);
-    const [sessions, setSessions] = useState([]);
+    const [sessions, setSessions] = useState(null);
     const [date, setDate] = useState([]);
     const [seats, setSeats] = useState([]);
+    const [children, setChildren] = useState(null)
 
     function info() {
         Modal.info({
@@ -33,20 +35,17 @@ const Booking = ({ history, match }) => {
     useEffect(() => {
         axios.get('http://localhost:3030/sessions-date', {})
         .then((res) => {
-            console.log('resresres', res)
             setDate(res.data);
         })
     }, [])
-    
-    const children = [];
-        for (let i = 10; i < 36; i++) {
-        children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    }
 
     const onFinish = ( value ) => {    
-        axios.get('http://localhost:3030/sessions', {})
-        .then((res) => {
-            console.log('res', res.data)
+        axios.post('http://localhost:3030/book-ticket', {
+            ...value,
+            id: filmId,
+            seats: seats,
+            date: selectedDate,
+            session: selectedSession,
         })
         .then(() => {
             info();
@@ -55,6 +54,10 @@ const Booking = ({ history, match }) => {
 
     const onSelectSession = (value) => {
         setSelectedSession(value)
+        axios.get('http://localhost:3030/seats', {})
+        .then((res) => {
+            setChildren(res.data);
+        })
     }
 
     const onSelectDate = (value) => {
@@ -65,9 +68,9 @@ const Booking = ({ history, match }) => {
               }
         })
         .then((res) => {
-            console.log('res', res)
             setSessions(res.data);
         })
+        setSelectedDate(value)
     }
 
     const onSelectSeat = (value) => {
@@ -90,13 +93,13 @@ const Booking = ({ history, match }) => {
             </Col>
             <Col offset={4} span={4}>
                 <Select placeholder='Select Date' onChange={onSelectDate} style={{ width: '100%' }}>
-                    {date?.map((date, index) => <Option key={index} value={date.Date}>
-                        {date.Date}
+                    {date?.map((date, index) => <Option key={index} value={Object.values(date)}>
+                        {Object.values(date)}
                     </Option>)}
                 </Select>
             </Col>
         </Row>
-        {(sessions.length && <Row type='flex' style={{ marginTop: '20px' }}>
+        {(sessions && sessions.length && <Row type='flex' style={{ marginTop: '20px' }}>
                 <Col offset={2} span={2} style={{ display: 'flex', flexFlow: 'column nowrap', justifyContent: 'center', paddingLeft: '7px' }}>
                     <span>
                         Select Session
@@ -151,7 +154,12 @@ const Booking = ({ history, match }) => {
                                     onChange={onSelectSeat}
                                     mode='multiple'
                                 >
-                                    {children}
+                                    {children?.map((value, index) => {
+                                        return <Option key={index} value={{
+                                            key: `R-${value.Row}, S-${value.Seat}`,
+                                            id: value.Seat_ID,
+                                        }}>Row-{value.Row}, Seat-{value.Seat}</Option>
+                                })}
                                 </Select>
                             </Form.Item>
                         </Form.Item>
@@ -222,10 +230,10 @@ const Booking = ({ history, match }) => {
                                         Green
                                     </Col>
                                     <Col span={7}>
-                                        {seat}
+                                        {seat.key}
                                     </Col>
                                     <Col span={7}>
-                                         20/05/96
+                                         {selectedDate}
                                     </Col>
                                     <Col span={4} align='center'>
                                         20$ 

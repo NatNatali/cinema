@@ -1,20 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Row, Col, Button } from 'antd';
-import img1 from '../assets/img1.jpg'
 import { withRouter } from 'react-router-dom';
-
-const singleFilm = {
-    image: img1,
-    desc: 'Having started watching the series “Paper House”',
-    title: 'Film Title',
-    director: 'Director name',
-    country: 'Country',
-    premiere: 'Premiere',
-    genre: 'Genre',
-    duration: 'Duration',
-    actors: 'Actors',
-}
 
 const SingleFilm = ({ history, match }) => {
 
@@ -50,7 +37,6 @@ const SingleFilm = ({ history, match }) => {
               }
         })
         .then((res) => {
-            console.log('res.data', res.data)
             setSingleFilmGenre(res.data);
         })
     }, [filmId])

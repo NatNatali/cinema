@@ -77,7 +77,6 @@ const Main = () => {
 const [images, setImages] = useState([]);
 
 const [tab, setTab] = useState(0);
-const [day, setDay] = useState('monday')
 
 useEffect(() => {
     axios.get('http://localhost:3030/carusel-images', {})
@@ -85,13 +84,6 @@ useEffect(() => {
         setImages(res.data);
     })
 },[])
-
-// useEffect(() => {
-//     axios.get('http://localhost:3030/week-films', {})
-//     .then((res) => {
-//         console.log('res', res.data)
-//     })
-// }, [])
 
     return<>
         <Row>

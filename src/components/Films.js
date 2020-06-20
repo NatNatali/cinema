@@ -56,7 +56,7 @@ const Films = ({ history }) =>{
                             style={{ 
                                 width: '100%', 
                                 height: '250px',
-                                backgroundImage: `url(${film.Image})`,
+                                backgroundImage: `url(${film.Image})` || img4,
                                 backgroundSize:'cover' 
                             }}
                         />
