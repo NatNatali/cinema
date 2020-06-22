@@ -86,88 +86,89 @@ useEffect(() => {
 },[])
 
     return<>
-        <Row>
+        <Row style={{ height: '100%' }}>
             <Col span={24}>
                 <Carousel
+                    style={{ height: '100%' }}
                     autoplay
                     autoplaySpeed={3000}
                     infinite
                     slidesPerRow={3}
                 >
                     {images?.map((item, index)=> <div key={index}>
-                            <div 
-                                style={{ 
-                                    width: '100%', 
-                                    height: '500px', 
-                                    backgroundImage:`url(${item.Image})`, 
-                                    backgroundSize: 'cover',
-                                    backgroundRepeat: 'no-repeat',
-                                    padding: '0 15px',
-                                }} 
-                                />
+                        <div
+                            style={{
+                                width: '100%',
+                                height: 'calc(100vh - 120px)',
+                                backgroundImage:`url(${item.Image})`,
+                                backgroundSize: 'cover',
+                                backgroundRepeat: 'no-repeat',
+                                padding: '0 15px',
+                            }}
+                            />
                         </div>
                     )}
                 </Carousel>
             </Col>
         </Row>
-        <Row type='flex' justify='center' style={{ paddingTop: '20px' }}>
-            <Col>
-                <Tabs 
-                    defaultActiveKey={tab}
-                    onTabClick={(key) => setTab(key)}
-                >
-                    {week.map((week, index) => {
-                        return<TabPane tab={week.day} key={index}>
-                        {week.content}
-                    </TabPane>
-                    })}
-                </Tabs>
-            </Col>
-        </Row>
-        <Row style={{ marginBottom: '30px' }}>
-            <Col span={24}>
-                    <Row>
-                        <Col offset={2} span={5}>
-                            <span style={{ fontWeight: 'bold' }}>
-                                Time
-                            </span>
-                        </Col>
-                        <Col span={5}>
-                            <span style={{ fontWeight: 'bold' }}>
-                                Title
-                            </span>
-                        </Col>
-                        <Col span={5}>
-                            <span style={{ fontWeight: 'bold' }}>
-                                Genre
-                            </span>
-                        </Col>
-                        <Col span={5}>
-                            <span style={{ fontWeight: 'bold' }}>
-                                Directed by
-                            </span>
-                        </Col>
-                    </Row>
-                    <Divider style={{ borderTop: '1px solid #A7CDC2' }} />
-                    {contents[tab]?.map((content, index)=> {
-                        return<Row key={index}>
-                        <Col offset={2} span={5}>
-                            {content.time}
-                        </Col>
-                        <Col span={5}>
-                            {content.title}
-                        </Col>
-                        <Col span={5}>
-                            {content.genre}
-                        </Col>
-                        <Col span={5}>
-                            {content.director}
-                        </Col>
-                    </Row>
-                })}
-            </Col>
-        </Row>
+        {/*<Row type='flex' justify='center' style={{ paddingTop: '20px' }}>*/}
+        {/*    <Col>*/}
+        {/*        <Tabs */}
+        {/*            defaultActiveKey={tab}*/}
+        {/*            onTabClick={(key) => setTab(key)}*/}
+        {/*        >*/}
+        {/*            {week.map((week, index) => {*/}
+        {/*                return<TabPane tab={week.day} key={index}>*/}
+        {/*                {week.content}*/}
+        {/*            </TabPane>*/}
+        {/*            })}*/}
+        {/*        </Tabs>*/}
+        {/*    </Col>*/}
+        {/*</Row>*/}
+        {/*<Row style={{ marginBottom: '30px' }}>*/}
+        {/*    <Col span={24}>*/}
+        {/*        <Row>*/}
+        {/*            <Col offset={2} span={5}>*/}
+        {/*                <span style={{ fontWeight: 'bold' }}>*/}
+        {/*                    Time*/}
+        {/*                </span>*/}
+        {/*            </Col>*/}
+        {/*            <Col span={5}>*/}
+        {/*                <span style={{ fontWeight: 'bold' }}>*/}
+        {/*                    Title*/}
+        {/*                </span>*/}
+        {/*            </Col>*/}
+        {/*            <Col span={5}>*/}
+        {/*                <span style={{ fontWeight: 'bold' }}>*/}
+        {/*                    Genre*/}
+        {/*                </span>*/}
+        {/*            </Col>*/}
+        {/*            <Col span={5}>*/}
+        {/*                <span style={{ fontWeight: 'bold' }}>*/}
+        {/*                    Directed by*/}
+        {/*                </span>*/}
+        {/*            </Col>*/}
+        {/*        </Row>*/}
+        {/*        <Divider style={{ borderTop: '1px solid #A7CDC2' }} />*/}
+        {/*        {contents[tab]?.map((content, index)=> {*/}
+        {/*            return<Row key={index}>*/}
+        {/*            <Col offset={2} span={5}>*/}
+        {/*                {content.time}*/}
+        {/*            </Col>*/}
+        {/*            <Col span={5}>*/}
+        {/*                {content.title}*/}
+        {/*            </Col>*/}
+        {/*            <Col span={5}>*/}
+        {/*                {content.genre}*/}
+        {/*            </Col>*/}
+        {/*            <Col span={5}>*/}
+        {/*                {content.director}*/}
+        {/*            </Col>*/}
+        {/*        </Row>*/}
+        {/*        })}*/}
+        {/*    </Col>*/}
+        {/*</Row>*/}
     </>
-}
+};
 
 export default Main;
