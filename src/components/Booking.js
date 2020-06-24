@@ -14,6 +14,7 @@ const Booking = ({ history, match }) => {
     const [date, setDate] = useState([]);
     const [seats, setSeats] = useState([]);
     const [children, setChildren] = useState(null);
+    const [filmTitle, setFilmTitle] = useState(null);
 
     function info(res) {
         Modal.info({
@@ -37,6 +38,17 @@ const Booking = ({ history, match }) => {
             setDate(res.data);
         })
     }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:3030/single-film', {
+            params: {
+                id: filmId
+            }
+        })
+            .then((res) => {
+                setFilmTitle(res.data.Film_title);
+            })
+    }, [filmId]);
 
     const onFinish = ( value ) => {    
         axios.put('http://localhost:3030/book-ticket', {
@@ -195,14 +207,14 @@ const Booking = ({ history, match }) => {
                                     <Row type='flex' style={{ justifyContent: 'center'}}>
                                         <Col>
                                             <span style={{ fontWeight: 600, fontSize: '20px' }}>
-                                                Film Title
+                                                {filmTitle}
                                             </span>
                                         </Col>
                                     </Row>
                                     <Row type='flex' style={{ justifyContent: 'center'}}>
                                         <Col>
                                             <span style={{ fontWeight: 600, fontSize: '20px' }}>
-                                                18:00
+                                                {selectedSession}
                                             </span>
                                         </Col>
                                     </Row>
@@ -241,7 +253,7 @@ const Booking = ({ history, match }) => {
                                      {selectedDate}
                                 </Col>
                                 <Col span={4} align='center'>
-                                    20$
+                                    1000Դ
                                 </Col>
                             </Row>
                         </Col>

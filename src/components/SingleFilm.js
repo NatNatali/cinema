@@ -18,7 +18,8 @@ const SingleFilm = ({ history, match }) => {
         .then((res) => {
             setSingleFilm(res.data);
         })
-    }, [filmId])
+    }, [filmId]);
+
     useEffect(() => {
         axios.get('http://localhost:3030/single-film-actors', {
             params: {
@@ -28,7 +29,7 @@ const SingleFilm = ({ history, match }) => {
         .then((res) => {
             setSingleFilmActor(res.data);
         })
-    }, [filmId])
+    }, [filmId]);
 
     useEffect(() => {
         axios.get('http://localhost:3030/single-film-genre', {
@@ -39,7 +40,7 @@ const SingleFilm = ({ history, match }) => {
         .then((res) => {
             setSingleFilmGenre(res.data);
         })
-    }, [filmId])
+    }, [filmId]);
 
     return<div style={{ minHeight: 'calc(100vh - 113px)'}}>
         <Row style={{ padding: '15px 0'}}>
