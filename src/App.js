@@ -14,7 +14,7 @@ function App () {
   return (<BrowserRouter>
     <div>
       <Header />
-      <div style={{ height: 'calc(100vh - 60px)' }}>
+      <div style={{ height: 'calc(100vh - 114px)' }}>
         <Scrollbars>
           <Switch>
             <Route exact path='/' component={Main}/>
@@ -23,9 +23,9 @@ function App () {
             <Route exact path='/films/:id?' component={SingleFilm}/>
             <Route exact path='/films/:id?/booking/:bookingId?' component={Booking}/>
           </Switch>
-          <Footer />
         </Scrollbars>
       </div>
+      <Footer />
     </div>
   </BrowserRouter>);
 }

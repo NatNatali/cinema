@@ -16,7 +16,7 @@ const Films = ({ history }) =>{
         .then((res) => {
             setFilms(res.data);
         })
-    }, [])
+    }, []);
 
     const handleSearchFilms = (value) => {
         axios.get('http://localhost:3030/films', {
@@ -27,7 +27,7 @@ const Films = ({ history }) =>{
         .then((res) => {
             setFilms(res.data);
         })
-    }
+    };
 
     return <div style={{ minHeight: 'calc(100vh - 113px)'}}>
         <Row style={{ padding: '15px 0'}}>
